@@ -13,7 +13,6 @@ class CombinationModelMapper extends ClassMapperBase<CombinationModel> {
   static CombinationModelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = CombinationModelMapper._());
-      ItemModelMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -21,23 +20,22 @@ class CombinationModelMapper extends ClassMapperBase<CombinationModel> {
   @override
   final String id = 'CombinationModel';
 
-  static String _$description(CombinationModel v) => v.description;
-  static const Field<CombinationModel, String> _f$description =
-      Field('description', _$description);
-  static ItemModel _$correctItem(CombinationModel v) => v.correctItem;
-  static const Field<CombinationModel, ItemModel> _f$correctItem =
-      Field('correctItem', _$correctItem);
+  static List<String> _$tags(CombinationModel v) => v.tags;
+  static const Field<CombinationModel, List<String>> _f$tags =
+      Field('tags', _$tags);
+  static String _$correctItemUuid(CombinationModel v) => v.correctItemUuid;
+  static const Field<CombinationModel, String> _f$correctItemUuid =
+      Field('correctItemUuid', _$correctItemUuid);
 
   @override
   final MappableFields<CombinationModel> fields = const {
-    #description: _f$description,
-    #correctItem: _f$correctItem,
+    #tags: _f$tags,
+    #correctItemUuid: _f$correctItemUuid,
   };
 
   static CombinationModel _instantiate(DecodingData data) {
     return CombinationModel(
-        description: data.dec(_f$description),
-        correctItem: data.dec(_f$correctItem));
+        tags: data.dec(_f$tags), correctItemUuid: data.dec(_f$correctItemUuid));
   }
 
   @override
@@ -94,8 +92,8 @@ extension CombinationModelValueCopy<$R, $Out>
 
 abstract class CombinationModelCopyWith<$R, $In extends CombinationModel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  ItemModelCopyWith<$R, ItemModel, ItemModel> get correctItem;
-  $R call({String? description, ItemModel? correctItem});
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get tags;
+  $R call({List<String>? tags, String? correctItemUuid});
   CombinationModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -109,18 +107,19 @@ class _CombinationModelCopyWithImpl<$R, $Out>
   late final ClassMapperBase<CombinationModel> $mapper =
       CombinationModelMapper.ensureInitialized();
   @override
-  ItemModelCopyWith<$R, ItemModel, ItemModel> get correctItem =>
-      $value.correctItem.copyWith.$chain((v) => call(correctItem: v));
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get tags =>
+      ListCopyWith($value.tags, (v, t) => ObjectCopyWith(v, $identity, t),
+          (v) => call(tags: v));
   @override
-  $R call({String? description, ItemModel? correctItem}) =>
+  $R call({List<String>? tags, String? correctItemUuid}) =>
       $apply(FieldCopyWithData({
-        if (description != null) #description: description,
-        if (correctItem != null) #correctItem: correctItem
+        if (tags != null) #tags: tags,
+        if (correctItemUuid != null) #correctItemUuid: correctItemUuid
       }));
   @override
   CombinationModel $make(CopyWithData data) => CombinationModel(
-      description: data.get(#description, or: $value.description),
-      correctItem: data.get(#correctItem, or: $value.correctItem));
+      tags: data.get(#tags, or: $value.tags),
+      correctItemUuid: data.get(#correctItemUuid, or: $value.correctItemUuid));
 
   @override
   CombinationModelCopyWith<$R2, CombinationModel, $Out2> $chain<$R2, $Out2>(

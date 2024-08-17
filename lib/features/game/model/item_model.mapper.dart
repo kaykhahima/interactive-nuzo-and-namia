@@ -20,21 +20,26 @@ class ItemModelMapper extends ClassMapperBase<ItemModel> {
   @override
   final String id = 'ItemModel';
 
+  static String _$uuid(ItemModel v) => v.uuid;
+  static const Field<ItemModel, String> _f$uuid = Field('uuid', _$uuid);
   static String _$name(ItemModel v) => v.name;
   static const Field<ItemModel, String> _f$name = Field('name', _$name);
-  static String _$imagePath(ItemModel v) => v.imagePath;
-  static const Field<ItemModel, String> _f$imagePath =
-      Field('imagePath', _$imagePath);
+  static String _$imageUuid(ItemModel v) => v.imageUuid;
+  static const Field<ItemModel, String> _f$imageUuid =
+      Field('imageUuid', _$imageUuid);
 
   @override
   final MappableFields<ItemModel> fields = const {
+    #uuid: _f$uuid,
     #name: _f$name,
-    #imagePath: _f$imagePath,
+    #imageUuid: _f$imageUuid,
   };
 
   static ItemModel _instantiate(DecodingData data) {
     return ItemModel(
-        name: data.dec(_f$name), imagePath: data.dec(_f$imagePath));
+        uuid: data.dec(_f$uuid),
+        name: data.dec(_f$name),
+        imageUuid: data.dec(_f$imageUuid));
   }
 
   @override
@@ -87,7 +92,7 @@ extension ItemModelValueCopy<$R, $Out> on ObjectCopyWith<$R, ItemModel, $Out> {
 
 abstract class ItemModelCopyWith<$R, $In extends ItemModel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? name, String? imagePath});
+  $R call({String? uuid, String? name, String? imageUuid});
   ItemModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -100,14 +105,17 @@ class _ItemModelCopyWithImpl<$R, $Out>
   late final ClassMapperBase<ItemModel> $mapper =
       ItemModelMapper.ensureInitialized();
   @override
-  $R call({String? name, String? imagePath}) => $apply(FieldCopyWithData({
+  $R call({String? uuid, String? name, String? imageUuid}) =>
+      $apply(FieldCopyWithData({
+        if (uuid != null) #uuid: uuid,
         if (name != null) #name: name,
-        if (imagePath != null) #imagePath: imagePath
+        if (imageUuid != null) #imageUuid: imageUuid
       }));
   @override
   ItemModel $make(CopyWithData data) => ItemModel(
+      uuid: data.get(#uuid, or: $value.uuid),
       name: data.get(#name, or: $value.name),
-      imagePath: data.get(#imagePath, or: $value.imagePath));
+      imageUuid: data.get(#imageUuid, or: $value.imageUuid));
 
   @override
   ItemModelCopyWith<$R2, ItemModel, $Out2> $chain<$R2, $Out2>(

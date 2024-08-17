@@ -4,11 +4,13 @@ part 'item_model.mapper.dart';
 
 @MappableClass()
 class ItemModel with ItemModelMappable {
+  final String uuid;
   final String name;
-  final String imagePath;
+  final String imageUuid;
 
   ItemModel({
+    required this.uuid,
     required this.name,
-    required this.imagePath,
+    required this.imageUuid,
   });
 }

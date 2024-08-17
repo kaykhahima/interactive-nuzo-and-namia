@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:interactive_nuzo_and_namia/features/game/model/item_model.dart';
 import 'package:interactive_nuzo_and_namia/helpers/helper_methods.dart';
 
@@ -7,7 +8,7 @@ import '../model/combination_model.dart';
 import '../model/game_model.dart';
 
 class GameViewModel extends ChangeNotifier {
-  final GameModel model = GameModel();
+  final model = GetIt.I<GameModel>();
 
   List<ItemModel> _items = [];
   List<ItemModel> get items => _items;
@@ -81,7 +82,7 @@ class GameViewModel extends ChangeNotifier {
   }
 
   void checkCombination() {
-    if (_selectedItem == _currentCombination!.correctItem) {
+    if (_selectedItem?.uuid == _currentCombination!.correctItemUuid) {
       // Show wrong dialog
       AppHelpers.showSnackbar(color: Colors.green, message: 'Correct answer!');
 

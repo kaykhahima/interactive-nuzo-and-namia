@@ -23,7 +23,23 @@ class CombinationTile extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineSmall,
           children: [
             TextSpan(
-              text: combination.description,
+              text: '${combination.tags[0]}, ',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            TextSpan(
+              text: '${combination.tags[1]} ',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            TextSpan(
+              text: 'and makes you ',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            TextSpan(
+              text: '${combination.tags[2]}.',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),

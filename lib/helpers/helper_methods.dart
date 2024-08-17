@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../utils/constants.dart';
 import '../utils/navigation_keys.dart';
 
 class AppHelpers {
@@ -13,5 +14,9 @@ class AppHelpers {
       content: Text(message),
     );
     NavKeys.rootScaffoldMessengerKey.currentState?.showSnackBar(snackBar);
+  }
+
+  static String getImageUrl({required String imageUuid}) {
+    return '${AppConstants.endpoint}/storage/buckets/${AppConstants.imagesBucketId}/files/$imageUuid/view?project=${AppConstants.projectId}';
   }
 }

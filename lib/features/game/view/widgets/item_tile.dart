@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:interactive_nuzo_and_namia/features/game/model/item_model.dart';
 import 'package:interactive_nuzo_and_namia/features/game/view_model/game_view_model.dart';
+import 'package:interactive_nuzo_and_namia/helpers/helper_methods.dart';
 import 'package:provider/provider.dart';
 
 class ItemTile extends StatefulWidget {
@@ -39,10 +41,14 @@ class _ItemTileState extends State<ItemTile> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                widget.item.imagePath,
-                height: 100,
-              ),
+              CachedNetworkImage(
+                imageUrl:
+                    AppHelpers.getImageUrl(imageUuid: widget.item.imageUuid),
+                imageBuilder: (context, imageProvider) => Image.network(
+                  AppHelpers.getImageUrl(imageUuid: widget.item.imageUuid),
+                  height: 100,
+                ),
+              )
             ],
           ),
         ),

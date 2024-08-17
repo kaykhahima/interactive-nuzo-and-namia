@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interactive_nuzo_and_namia/service_locator.dart';
 import 'package:interactive_nuzo_and_namia/shared/providers_list.dart';
 import 'package:interactive_nuzo_and_namia/utils/navigation_keys.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,10 @@ import 'config/routes/app_routes.dart';
 import 'config/theme/app_theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  //dependency injection
+  initializeDependencies();
+
   runApp(
     MultiProvider(
       providers: providers,

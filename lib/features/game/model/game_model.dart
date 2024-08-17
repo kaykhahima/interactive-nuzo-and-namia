@@ -1,59 +1,79 @@
-import '../../../resources/resources.dart';
+import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/models.dart';
+
+import '../../../core/network/network_info.dart';
+import '../../../utils/constants.dart';
 import 'combination_model.dart';
 import 'item_model.dart';
 
 class GameModel {
+  final Client client;
+  final Databases database;
+  final NetworkInfo networkInfo;
+
+  GameModel({
+    required this.client,
+    required this.database,
+    required this.networkInfo,
+  });
+
   //A method to fetch items. Mocks an API call by adding a delay of 1 second
   Future<List<ItemModel>> getItems() async {
+    List<ItemModel> items = [];
+
+    if (!await networkInfo.isConnected) {
+      throw 'No internet connection';
+    }
+
+    //get items from appwrite database
     try {
-      return Future.delayed(const Duration(seconds: 1), () {
-        return items;
-      });
+      DocumentList result = await database.listDocuments(
+        databaseId: AppConstants.databaseId,
+        collectionId: AppConstants.itemsCollectionId, // optional
+      );
+
+      for (Document doc in result.documents) {
+        items.add(ItemModel(
+          uuid: doc.data['\$id'],
+          name: doc.data['name'],
+          imageUuid: doc.data['imageUuid'],
+        ));
+      }
+      return items;
+    } on AppwriteException catch (e) {
+      throw e.message.toString();
     } catch (e) {
-      throw 'An error occurred while fetching items';
+      throw e.toString();
     }
   }
 
   //A method to fetch combinations. Mocks an API call by adding a delay of 1 second
   Future<List<CombinationModel>> getCombinations() async {
+    List<CombinationModel> combinations = [];
+
+    if (!await networkInfo.isConnected) {
+      throw 'No internet connection';
+    }
+
+    //get combinations from appwrite database
     try {
-      return Future.delayed(const Duration(seconds: 1), () {
-        return combinations;
-      });
+      DocumentList result = await database.listDocuments(
+        databaseId: AppConstants.databaseId,
+        collectionId: AppConstants.combinationsCollectionId, // optional
+      );
+
+      for (Document doc in result.documents) {
+        combinations.add(CombinationModel(
+          tags: List<String>.from(doc.data['tags']),
+          correctItemUuid: doc.data['correctItemUuid'],
+        ));
+      }
+      return combinations;
+    } on AppwriteException catch (e) {
+      print(e.toString());
+      throw e.message.toString();
     } catch (e) {
-      throw 'An error occurred while fetching combinations';
+      throw e.toString();
     }
   }
 }
-
-//a static list of items, but typically this one will be fetched from an API
-List<ItemModel> items = [
-  ItemModel(name: 'Baobab tree', imagePath: Images.baobabTree),
-  ItemModel(name: 'Bean', imagePath: Images.bean),
-  ItemModel(name: 'Drum', imagePath: Images.drum),
-  ItemModel(name: 'Ice cream', imagePath: Images.iceCream),
-  ItemModel(name: 'Mango', imagePath: Images.mango),
-  ItemModel(name: 'Fabric', imagePath: Images.fabric),
-  ItemModel(name: 'Grass', imagePath: Images.grass),
-  ItemModel(name: 'Sun', imagePath: Images.sun),
-  ItemModel(name: 'Lion', imagePath: Images.lion),
-  ItemModel(name: 'Papaya', imagePath: Images.papaya),
-  ItemModel(name: 'Rice', imagePath: Images.rice),
-  ItemModel(name: 'Trumpet', imagePath: Images.trumpet),
-];
-
-//a static list of combinations, but typically this one will be fetched from an API
-List<CombinationModel> combinations = [
-  CombinationModel(
-    description: 'Cold, Sweet and makes you happy',
-    correctItem: items[3],
-  ),
-  CombinationModel(
-    description: 'Bright, Hot and makes you sweat',
-    correctItem: items[7],
-  ),
-  CombinationModel(
-    description: 'Loud, Smooth and makes you dance',
-    correctItem: items[2],
-  ),
-];
