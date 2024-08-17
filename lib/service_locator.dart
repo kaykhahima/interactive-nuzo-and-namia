@@ -8,7 +8,7 @@ import 'features/game/model/game_model.dart';
 final sl = GetIt.instance;
 
 void initializeDependencies() {
-  //get instance of appwrite client
+  //get instance of appwrite (backend) client
   final client = Client()
       .setEndpoint(AppConstants.endpoint)
       .setProject(AppConstants.projectId);

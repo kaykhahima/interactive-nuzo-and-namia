@@ -23,6 +23,7 @@ class _ItemTileState extends State<ItemTile> {
         height: 120,
         width: 150,
         margin: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
           border: Border.all(
