@@ -29,7 +29,7 @@ class NuzoAndNamiaApp extends StatelessWidget {
       title: 'Nuzo and Namia App',
       theme: AppTheme.theme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: NavKeys.rootScaffoldMessengerKey,
       routeInformationProvider: AppRoutes.router.routeInformationProvider,

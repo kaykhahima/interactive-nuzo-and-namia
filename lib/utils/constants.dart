@@ -9,5 +9,5 @@ class AppConstants {
   static const String imagesBucketId = '66bcc64e002f2c345179';
   static const String videosBucketId = '66c056d9002bb67b8822';
   static const String nuzoAndNamiaVideoUrl =
-      'https://github.com/kaykhahima/interactive-nuzo-and-namia/blob/main/assets/videos/NN101_480p.mp4';
+      'https://github.com/kaykhahima/interactive-nuzo-and-namia/raw/main/assets/videos/NN101_480p.mp4';
 }

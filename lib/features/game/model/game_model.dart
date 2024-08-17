@@ -70,7 +70,6 @@ class GameModel {
       }
       return combinations;
     } on AppwriteException catch (e) {
-      print(e.toString());
       throw e.message.toString();
     } catch (e) {
       throw e.toString();

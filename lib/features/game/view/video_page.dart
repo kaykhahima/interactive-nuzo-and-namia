@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
@@ -45,7 +46,7 @@ class _VideoPageState extends State<VideoPage> {
 
   _playOpeningScene(GameViewModel gameViewModel) {
     const startDuration = Duration(minutes: 4, seconds: 5);
-    const endDuration = Duration(minutes: 4, seconds: 8);
+    const endDuration = Duration(minutes: 4, seconds: 55);
 
     gameViewModel.playOpeningCutscene(
       start: startDuration,
@@ -54,8 +55,17 @@ class _VideoPageState extends State<VideoPage> {
   }
 
   _playClosingScene(GameViewModel gameViewModel) {
-    const duration = Duration(minutes: 14, seconds: 0);
+    const duration = Duration(minutes: 8, seconds: 20);
     gameViewModel.playClosingScene(duration: duration);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    final gameViewModel = context.read<GameViewModel>();
+    gameViewModel.controller.dispose();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
   }
 
   @override
@@ -76,16 +86,29 @@ class _VideoPageState extends State<VideoPage> {
 
             return Consumer<GameViewModel>(
                 builder: (context, gameViewModel, _) {
-              return Center(
-                child: gameViewModel.controller.value.isInitialized
-                    ? AspectRatio(
-                        aspectRatio: gameViewModel.controller.value.aspectRatio,
-                        child: VideoPlayer(gameViewModel.controller),
-                      )
-                    : const CircularProgressIndicator(),
-              );
+              return gameViewModel.controller.value.isInitialized
+                  ? buildFullScreen(gameViewModel)
+                  : const Center(child: CircularProgressIndicator());
             });
           }),
+    );
+  }
+
+  Widget buildFullScreen(GameViewModel gameViewModel) {
+    final width = MediaQuery.sizeOf(context).width;
+    final height = MediaQuery.sizeOf(context).height;
+    return Center(
+      child: FittedBox(
+        fit: BoxFit.cover,
+        child: SizedBox(
+          width: width,
+          height: height,
+          child: AspectRatio(
+            aspectRatio: gameViewModel.controller.value.aspectRatio,
+            child: VideoPlayer(gameViewModel.controller),
+          ),
+        ),
+      ),
     );
   }
 }

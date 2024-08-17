@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:interactive_nuzo_and_namia/features/game/model/item_model.dart';
 import 'package:interactive_nuzo_and_namia/helpers/helper_methods.dart';
+import 'package:interactive_nuzo_and_namia/utils/constants.dart';
 import 'package:video_player/video_player.dart';
 
 import '../model/combination_model.dart';
@@ -107,10 +109,23 @@ class GameViewModel extends ChangeNotifier {
   }
 
   Future<void> initializeVideo() async {
-    _controller = VideoPlayerController.asset('assets/videos/NN101_480p.mp4')
-      ..initialize().then((_) {
+    _controller = VideoPlayerController.networkUrl(
+      Uri.parse(AppConstants.nuzoAndNamiaVideoUrl),
+    )..initialize().then((_) {
         notifyListeners();
       });
+
+    _setLandscape();
+  }
+
+  void _setLandscape() {
+    // Set landscape orientation
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   }
 
   Future<void> playOpeningCutscene({
