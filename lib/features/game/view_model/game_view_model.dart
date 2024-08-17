@@ -147,13 +147,13 @@ class GameViewModel extends ChangeNotifier {
     required Duration start,
     required Duration end,
   }) async {
-    await _videoPlayerController.seekTo(start);
-    await _videoPlayerController.play();
+    _chewieController.seekTo(start);
+    _chewieController.play();
 
     _videoPlayerController.addListener(() async {
-      if (_videoPlayerController.value.position >= end) {
-        await _videoPlayerController.pause();
+      if (_chewieController.videoPlayerController.value.position >= end) {
         _hasOpeningSceneEnded = true;
+        _chewieController.pause();
         notifyListeners();
       }
     });
@@ -162,5 +162,12 @@ class GameViewModel extends ChangeNotifier {
   void playClosingScene({required Duration duration}) {
     _chewieController.seekTo(duration);
     _chewieController.play();
+  }
+
+  void disposeVideo() {
+    _videoPlayerController.dispose();
+    _chewieController.dispose();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
   }
 }
