@@ -43,6 +43,7 @@ class GameViewModel extends ChangeNotifier {
       final items = await model.getItems();
       _items = items;
     } catch (e) {
+      AppHelpers.showSnackbar(message: e.toString(), color: Colors.red);
       if (kDebugMode) {
         print(e);
       }
@@ -55,6 +56,7 @@ class GameViewModel extends ChangeNotifier {
       final combinations = await model.getCombinations();
       _combinations = combinations;
     } catch (e) {
+      AppHelpers.showSnackbar(message: e.toString(), color: Colors.red);
       if (kDebugMode) {
         print(e);
       }
@@ -125,7 +127,7 @@ class GameViewModel extends ChangeNotifier {
       allowedScreenSleep: false,
       allowPlaybackSpeedChanging: false,
       showOptions: false,
-      showControls: true,
+      showControls: false,
     );
 
     _setLandscape();
@@ -150,7 +152,7 @@ class GameViewModel extends ChangeNotifier {
 
     _videoPlayerController.addListener(() async {
       if (_videoPlayerController.value.position >= end) {
-        await _chewieController.pause();
+        await _videoPlayerController.pause();
         _hasOpeningSceneEnded = true;
         notifyListeners();
       }

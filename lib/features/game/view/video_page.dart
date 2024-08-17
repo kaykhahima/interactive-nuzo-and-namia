@@ -1,6 +1,5 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../model/game_model.dart';
@@ -57,15 +56,6 @@ class _VideoPageState extends State<VideoPage> {
   _playClosingScene(GameViewModel gameViewModel) {
     const duration = Duration(minutes: 8, seconds: 20);
     gameViewModel.playClosingScene(duration: duration);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.manual,
-      overlays: SystemUiOverlay.values,
-    );
   }
 
   @override

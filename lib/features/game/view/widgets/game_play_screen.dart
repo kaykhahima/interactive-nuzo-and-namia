@@ -23,14 +23,18 @@ class _GamePlayScreenState extends State<GamePlayScreen> {
   }
 
   Future _loadData() async {
-    final gameViewModel = context.read<GameViewModel>();
+    try {
+      final gameViewModel = context.read<GameViewModel>();
 
-    // Fetch combinations and set initial combination
-    await gameViewModel.getCombinations();
-    gameViewModel.setInitialCombination();
+      // Fetch combinations and set initial combination
+      await gameViewModel.getCombinations();
+      gameViewModel.setInitialCombination();
 
-    // Fetch items
-    await gameViewModel.getItems();
+      // Fetch items
+      await gameViewModel.getItems();
+    } catch (e) {
+      return Future.error(e);
+    }
   }
 
   @override
@@ -56,6 +60,7 @@ class _GamePlayScreenState extends State<GamePlayScreen> {
                   CombinationList(),
                   Gap(12.0),
                   ItemList(),
+                  Gap(24.0),
                 ],
               ),
             );
