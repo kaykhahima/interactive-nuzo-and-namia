@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../view_model/game_view_model.dart';
@@ -58,9 +57,9 @@ class _GamePlayScreenState extends State<GamePlayScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CombinationList(),
-                  Gap(12.0),
+                  SizedBox(height: 12.0),
                   ItemList(),
-                  Gap(24.0),
+                  SizedBox(height: 24.0),
                 ],
               ),
             );

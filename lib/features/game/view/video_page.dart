@@ -45,7 +45,7 @@ class _VideoPageState extends State<VideoPage> {
 
   _playOpeningScene(GameViewModel gameViewModel) {
     const startDuration = Duration(minutes: 4, seconds: 5);
-    const endDuration = Duration(minutes: 4, seconds: 8);
+    const endDuration = Duration(minutes: 4, seconds: 55);
 
     gameViewModel.playOpeningCutscene(
       start: startDuration,
@@ -54,7 +54,7 @@ class _VideoPageState extends State<VideoPage> {
   }
 
   _playClosingScene(GameViewModel gameViewModel) {
-    const duration = Duration(minutes: 8, seconds: 55);
+    const duration = Duration(minutes: 8, seconds: 20);
     gameViewModel.playClosingScene(duration: duration);
   }
 
