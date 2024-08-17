@@ -24,6 +24,7 @@ dependencies:
   internet_connection_checker_plus: ^2.5.1
   appwrite: ^12.0.4
   cached_network_image: ^3.4.0
+  chewie: ^1.8.3
 
 dev_dependencies:
   flutter_test:

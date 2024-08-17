@@ -39,8 +39,10 @@ class _GamePlayScreenState extends State<GamePlayScreen> {
         future: _loadDataFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: CircularProgressIndicator(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
             );
           } else if (snapshot.hasError) {
             return Center(

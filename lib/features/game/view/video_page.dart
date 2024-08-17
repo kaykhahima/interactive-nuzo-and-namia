@@ -1,7 +1,7 @@
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
 
 import '../model/game_model.dart';
 import '../view_model/game_view_model.dart';
@@ -62,15 +62,16 @@ class _VideoPageState extends State<VideoPage> {
   @override
   void dispose() {
     super.dispose();
-    final gameViewModel = context.read<GameViewModel>();
-    gameViewModel.controller.dispose();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: SystemUiOverlay.values,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.shadow,
       body: FutureBuilder(
           future: _initializeVideoFuture,
           builder: (context, snapshot) {
@@ -86,29 +87,9 @@ class _VideoPageState extends State<VideoPage> {
 
             return Consumer<GameViewModel>(
                 builder: (context, gameViewModel, _) {
-              return gameViewModel.controller.value.isInitialized
-                  ? buildFullScreen(gameViewModel)
-                  : const Center(child: CircularProgressIndicator());
+              return Chewie(controller: gameViewModel.chewieController);
             });
           }),
-    );
-  }
-
-  Widget buildFullScreen(GameViewModel gameViewModel) {
-    final width = MediaQuery.sizeOf(context).width;
-    final height = MediaQuery.sizeOf(context).height;
-    return Center(
-      child: FittedBox(
-        fit: BoxFit.cover,
-        child: SizedBox(
-          width: width,
-          height: height,
-          child: AspectRatio(
-            aspectRatio: gameViewModel.controller.value.aspectRatio,
-            child: VideoPlayer(gameViewModel.controller),
-          ),
-        ),
-      ),
     );
   }
 }

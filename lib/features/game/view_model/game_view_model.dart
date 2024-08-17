@@ -1,3 +1,4 @@
+import 'package:chewie/chewie.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,8 +26,11 @@ class GameViewModel extends ChangeNotifier {
   CombinationModel? _currentCombination;
   CombinationModel? get currentCombination => _currentCombination;
 
-  late VideoPlayerController _controller;
-  VideoPlayerController get controller => _controller;
+  late ChewieController _chewieController;
+  ChewieController get chewieController => _chewieController;
+
+  late VideoPlayerController _videoPlayerController;
+  VideoPlayerController get videoPlayerController => _videoPlayerController;
 
   bool _hasOpeningSceneEnded = false;
   bool get hasOpeningSceneEnded => _hasOpeningSceneEnded;
@@ -109,11 +113,20 @@ class GameViewModel extends ChangeNotifier {
   }
 
   Future<void> initializeVideo() async {
-    _controller = VideoPlayerController.networkUrl(
+    _videoPlayerController = VideoPlayerController.networkUrl(
       Uri.parse(AppConstants.nuzoAndNamiaVideoUrl),
-    )..initialize().then((_) {
-        notifyListeners();
-      });
+    );
+
+    await _videoPlayerController.initialize();
+
+    _chewieController = ChewieController(
+      videoPlayerController: _videoPlayerController,
+      fullScreenByDefault: true,
+      allowedScreenSleep: false,
+      allowPlaybackSpeedChanging: false,
+      showOptions: false,
+      showControls: true,
+    );
 
     _setLandscape();
   }
@@ -132,12 +145,12 @@ class GameViewModel extends ChangeNotifier {
     required Duration start,
     required Duration end,
   }) async {
-    await _controller.seekTo(start);
-    await _controller.play();
+    await _videoPlayerController.seekTo(start);
+    await _videoPlayerController.play();
 
-    _controller.addListener(() async {
-      if (_controller.value.position >= end) {
-        await _controller.pause();
+    _videoPlayerController.addListener(() async {
+      if (_videoPlayerController.value.position >= end) {
+        await _chewieController.pause();
         _hasOpeningSceneEnded = true;
         notifyListeners();
       }
@@ -145,7 +158,7 @@ class GameViewModel extends ChangeNotifier {
   }
 
   void playClosingScene({required Duration duration}) {
-    _controller.seekTo(duration);
-    _controller.play();
+    _chewieController.seekTo(duration);
+    _chewieController.play();
   }
 }
