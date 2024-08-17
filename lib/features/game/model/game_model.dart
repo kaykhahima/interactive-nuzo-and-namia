@@ -77,3 +77,5 @@ class GameModel {
     }
   }
 }
+
+enum VideoScene { openScene, closeScene }

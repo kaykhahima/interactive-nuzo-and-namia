@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:interactive_nuzo_and_namia/features/game/model/item_model.dart';
 import 'package:interactive_nuzo_and_namia/helpers/helper_methods.dart';
+import 'package:video_player/video_player.dart';
 
 import '../model/combination_model.dart';
 import '../model/game_model.dart';
@@ -21,6 +22,15 @@ class GameViewModel extends ChangeNotifier {
 
   CombinationModel? _currentCombination;
   CombinationModel? get currentCombination => _currentCombination;
+
+  late VideoPlayerController _controller;
+  VideoPlayerController get controller => _controller;
+
+  bool _hasOpeningSceneEnded = false;
+  bool get hasOpeningSceneEnded => _hasOpeningSceneEnded;
+
+  bool _hasGameBeenCompleted = false;
+  bool get hasGameBeenCompleted => _hasGameBeenCompleted;
 
   Future<void> getItems() async {
     try {
@@ -72,13 +82,8 @@ class GameViewModel extends ChangeNotifier {
   }
 
   void _completeGame() {
-    // Show completion dialog
-    AppHelpers.showSnackbar(
-        color: Colors.green,
-        message: 'Congratulations! You have completed the game.');
-
-    //todo: proceed to the closing scene which will be extracted from the scene
-    //todo: where Bubelang says finally i’m free and flies out, timestamp from 8:20.
+    _hasGameBeenCompleted = true;
+    notifyListeners();
   }
 
   void checkCombination() {
@@ -99,5 +104,33 @@ class GameViewModel extends ChangeNotifier {
       AppHelpers.showSnackbar(
           color: Colors.red, message: 'Incorrect. Please try again.');
     }
+  }
+
+  Future<void> initializeVideo() async {
+    _controller = VideoPlayerController.asset('assets/videos/NN101_480p.mp4')
+      ..initialize().then((_) {
+        notifyListeners();
+      });
+  }
+
+  Future<void> playOpeningCutscene({
+    required Duration start,
+    required Duration end,
+  }) async {
+    await _controller.seekTo(start);
+    await _controller.play();
+
+    _controller.addListener(() async {
+      if (_controller.value.position >= end) {
+        await _controller.pause();
+        _hasOpeningSceneEnded = true;
+        notifyListeners();
+      }
+    });
+  }
+
+  void playClosingScene({required Duration duration}) {
+    _controller.seekTo(duration);
+    _controller.play();
   }
 }
