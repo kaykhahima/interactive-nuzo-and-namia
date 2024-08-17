@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:interactive_nuzo_and_namia/features/game/view/video_page.dart';
 import 'package:interactive_nuzo_and_namia/features/game/view/widgets/combination_list.dart';
 import 'package:interactive_nuzo_and_namia/features/game/view/widgets/item_list.dart';
 
@@ -15,6 +17,7 @@ class GamePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // Expanded(child: VideoPage()),
               CombinationList(),
               Gap(12.0),
               ItemList(),

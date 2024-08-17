@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:interactive_nuzo_and_namia/features/game/model/combination_model.dart';
 
@@ -23,13 +24,13 @@ class CombinationTile extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineSmall,
           children: [
             TextSpan(
-              text: '${combination.tags[0]}, ',
+              text: '${combination.tags[0]}, '.capitalize,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
             ),
             TextSpan(
-              text: '${combination.tags[1]} ',
+              text: '${combination.tags[1]} '.capitalize,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -39,7 +40,7 @@ class CombinationTile extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             TextSpan(
-              text: '${combination.tags[2]}.',
+              text: '${combination.tags[2]}.'.toLowerCase(),
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
