@@ -9,7 +9,11 @@ Interactive - Nuzo and Namia App is a mobile application that is adopted from th
 The App begins with a video playing an opening scene. Once the scene ends, the player is prompted with a simple quiz game that asks the player to select the correct answer based on the information given on the screen. There are various combinations that the player can choose from, and the player can select the correct answer by tapping the correct item on the screen. Once the player completes all combinations correctly, the App plays the closing scene and the game ends.
 
 ### App Screenshots
-...
+|  |  |  |
+| ------------- |------------- |------------- |
+| ![Bubelang trapped](https://github.com/kaykhahima/interactive-nuzo-and-namia/blob/main/assets/images/screenshot_bubelang_trapped.jpg "Bubelang trapped")  | ![Combination one](https://github.com/kaykhahima/interactive-nuzo-and-namia/blob/main/assets/images/screenshot_combination_1.jpg "Combination one")  | ![Combination one - correct](https://github.com/kaykhahima/interactive-nuzo-and-namia/blob/main/assets/images/screenshot_combination_1_correct.jpg "Combination one - correct")  |
+| ![Combination one - incorrect](https://github.com/kaykhahima/interactive-nuzo-and-namia/blob/main/assets/images/screenshot_combination_1_incorrect.jpg "Combination one - incorrect")  | ![Combination two](https://github.com/kaykhahima/interactive-nuzo-and-namia/blob/main/assets/images/screenshot_combination_2.jpg "Combination two")  | ![Bubelang freed](https://github.com/kaykhahima/interactive-nuzo-and-namia/blob/main/assets/images/screenshot_bubelang_free.jpg "Bubelang freed")  |
+
 
 ## Technical Documentation
 This App is built using Flutter, a cross-platform mobile application development framework.
