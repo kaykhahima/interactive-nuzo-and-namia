@@ -36,7 +36,7 @@ dependencies:
   #  SDK for accessing backend data
   appwrite: ^12.0.4
 
-  #  caching images loaded from URL for fast retrieval
+  #  show images from the internet and keep them in the cache directory
   cached_network_image: ^3.4.0
 
   #  wrapper of video_player. has more control features
