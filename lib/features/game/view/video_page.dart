@@ -5,9 +5,12 @@ import 'package:provider/provider.dart';
 import '../model/game_model.dart';
 import '../view_model/game_view_model.dart';
 
+/// This page shows the video screen. It plays the corresponding part of the video based on the scene.
+/// The opening scene is played when the game starts. The closing scene is played when the game is completed.
 class VideoPage extends StatefulWidget {
   const VideoPage({super.key, required this.scene});
 
+  /// The scene to play.
   final VideoScene scene;
 
   @override
@@ -23,6 +26,7 @@ class _VideoPageState extends State<VideoPage> {
     _initializeVideoFuture = _initializeVideo();
   }
 
+  // Initialize the video
   Future<void> _initializeVideo() async {
     final gameViewModel = context.read<GameViewModel>();
     await gameViewModel.initializeVideo();
@@ -30,19 +34,24 @@ class _VideoPageState extends State<VideoPage> {
     //delay for a second
     await Future.delayed(const Duration(seconds: 1));
 
+    // Play the video based on scene
     _playVideo(widget.scene);
   }
 
   _playVideo(VideoScene scene) {
     final gameViewModel = context.read<GameViewModel>();
 
+    // if scene is opening scene, play the opening scene
     if (scene == VideoScene.openScene) {
       _playOpeningScene(gameViewModel);
-    } else {
+    }
+    // if scene is closing scene, play the closing scene
+    else {
       _playClosingScene(gameViewModel);
     }
   }
 
+  // Play the opening scene which begins at 4:05 and ends at 4:55
   _playOpeningScene(GameViewModel gameViewModel) {
     const startDuration = Duration(minutes: 4, seconds: 5);
     const endDuration = Duration(minutes: 4, seconds: 55);
@@ -53,6 +62,7 @@ class _VideoPageState extends State<VideoPage> {
     );
   }
 
+  // Play the closing scene which begins at 8:20
   _playClosingScene(GameViewModel gameViewModel) {
     const duration = Duration(minutes: 8, seconds: 20);
     gameViewModel.playClosingScene(duration: duration);

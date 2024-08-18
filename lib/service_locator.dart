@@ -5,8 +5,10 @@ import 'package:interactive_nuzo_and_namia/utils/constants.dart';
 import 'core/network/network_info.dart';
 import 'features/game/model/game_model.dart';
 
+//get instance of get_it
 final sl = GetIt.instance;
 
+///Initialize dependencies
 void initializeDependencies() {
   //get instance of appwrite (backend) client
   final client = Client()

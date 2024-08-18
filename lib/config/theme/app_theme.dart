@@ -1,11 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+/// App theme class to provide light and dark themes for the app.
 class AppTheme {
   static ThemeData theme = lightAppTheme;
   static ThemeData darkTheme = darkAppTheme;
 }
 
+/// Light theme for the app.
 final ThemeData lightAppTheme = FlexThemeData.light(
   colors: const FlexSchemeColor(
     primary: Color(0xffa1b140),
@@ -53,6 +55,7 @@ final ThemeData lightAppTheme = FlexThemeData.light(
   // fontFamily: GoogleFonts.montserrat().fontFamily,
 );
 
+/// Dark theme for the app.
 final ThemeData darkAppTheme = FlexThemeData.dark(
   colors: const FlexSchemeColor(
     primary: Color(0xffa1b140),

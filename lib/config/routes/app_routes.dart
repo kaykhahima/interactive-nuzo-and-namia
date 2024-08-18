@@ -3,6 +3,7 @@ import 'package:interactive_nuzo_and_namia/utils/navigation_keys.dart';
 
 import '../../features/game/view/game_page.dart';
 
+/// This file contains the routes of the app for navigation by the GoRouter package.
 class AppRoutes {
   static String initialRoute = '/';
 

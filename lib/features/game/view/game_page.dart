@@ -6,6 +6,11 @@ import 'package:provider/provider.dart';
 
 import '../view_model/game_view_model.dart';
 
+/// This page is a wrapper for the game play screen and the video screen.
+/// It listens to the game view model to determine which screen to show.
+/// If the opening scene has not been played, the video screen is shown playing the opening scene
+/// If the opening scene has ended and the game is not yet completed, the game play screen is shown. This is where the player selects the correct combination
+/// If the game has been completed, the video screen is shown playing the closing scene
 class GamePage extends StatelessWidget {
   const GamePage({super.key});
 

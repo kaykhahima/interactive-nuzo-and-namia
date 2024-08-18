@@ -12,16 +12,34 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #  app navigation. navigating between screens
   go_router: ^14.2.3
+
+  #  code generator for model classes i.e. toJson, toMap, copyWith
   dart_mappable: ^4.2.2
+
+  #  state management
   provider: ^6.1.2
+
+  #  service locator and dependency injection
   get_it: ^7.7.0
-  http: ^1.2.2
+
+  #  app themeing. colors, light/dark mode, fonts
   flex_color_scheme: ^7.3.1
+
+  #  playing videos
   video_player: ^2.9.1
+
+  #  checks if there is internet connection
   internet_connection_checker_plus: ^2.5.1
+
+  #  SDK for accessing backend data
   appwrite: ^12.0.4
+
+  #  caching images loaded from URL for fast retrieval
   cached_network_image: ^3.4.0
+
+  #  wrapper of video_player. has more control features
   chewie: ^1.8.3
 
 dev_dependencies:
